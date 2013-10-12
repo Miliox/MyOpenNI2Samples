@@ -11,6 +11,7 @@ import org.openni.VideoStream;
 
 public class SimpleView {
 	private static JFrame          frame;
+	private static ComponentViewer viewer;
 
 	private static Device      device;
 	private static VideoStream videoStream;
@@ -39,7 +40,7 @@ public class SimpleView {
 		VideoMode mode = videoStream.getSensorInfo().getSupportedVideoModes().get(index);
 		videoStream.setVideoMode(mode);
 
-		ComponentViewer viewer = new ComponentViewer();
+		viewer = new ComponentViewer();
 		viewer.setVideoStream(videoStream);
 		viewer.setSize(mode.getResolutionX(), mode.getResolutionY());
 
@@ -53,6 +54,7 @@ public class SimpleView {
 			public void windowClosing(java.awt.event.WindowEvent e) {
 				System.out.println("hide window");
 				frame.setVisible(false);
+				viewer.setVideoStream(null);
 				System.out.println("stopping video stream...");
 				videoStream.stop();
 				System.out.println("closing device...");

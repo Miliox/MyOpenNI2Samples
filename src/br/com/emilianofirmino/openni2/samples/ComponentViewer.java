@@ -25,6 +25,10 @@ public class ComponentViewer extends Component implements NewFrameListener {
 			this.stream.removeNewFrameListener(this);
 		}
 
+		if (frame != null) {
+			frame.release();
+		}
+
 		this.stream = stream;
 
 		if (stream != null) {
